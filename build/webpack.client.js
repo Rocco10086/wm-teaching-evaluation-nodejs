@@ -1,71 +1,128 @@
 // 客户端打包配置
-const path = require('path')
-const merge = require('lodash.merge')
-const webpack = require('webpack')
-const { resolve } = require('./utils')
-const baseConfig = require('./webpack.base.conf')
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseConfig = require('./webpack.base.js');
+const join = require('path').join;
+const { merge } = require('webpack-merge');
+const VueClientPlugin = require('vue-server-renderer/client-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const ModuleFederationPlugin = require("webpack").container.ModuleFederationPlugin;
 
-// 生产环境标记
-const isProd = process.env.NODE_ENV === 'production'
-
-module.exports = merge(baseConfig, {
-  // 入口：客户端激活逻辑
+const isProd = process.env.NODE_ENV === 'production';
+function resolve(path) {
+  return join(__dirname, '..', path);
+}
+const config = merge(baseConfig, {
+  mode: isProd ? 'production' : 'development',
   entry: {
-    app: isProd 
-      ? './src/entry-client.js' 
-      : ['webpack-hot-middleware/client?reload=true', './src/entry-client.js']
+    app: resolve('src/entry.client.js'),
   },
-
-  // 输出：客户端资源
-  output: {
-    path: resolve('dist/client'),
-    filename: isProd ? 'static/js/[name].[chunkhash:8].js' : 'static/js/[name].js',
-    chunkFilename: isProd ? 'static/js/[name].[chunkhash:8].chunk.js' : 'static/js/[name].chunk.js',
-    publicPath: '/'
+  module: {
+    rules: [
+      {
+        test: /\.(c|le)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
-
-  // 开发工具：生产环境关闭 source-map，开发环境开启
-  devtool: isProd ? false : 'cheap-module-eval-source-map',
-
-  // 客户端特有插件
-  plugins: [
-    // 提取 CSS 到单独文件（生产环境）
-    isProd && new ExtractTextPlugin({
-      filename: 'static/css/[name].[contenthash:8].css',
-      allChunks: true
+  plugins: isProd ? [
+    new CleanWebpackPlugin(),
+    new VueClientPlugin(),
+    new ModuleFederationPlugin({
+      name: "consumer",
+      filename: "remoteEntry.js",
+      remotes: {
+        WmRemoteUI: `WmRemoteUI@${process.env.REMOTE_UI_ENTRY_URL}`,
+      },
     }),
+    new ModuleFederationPlugin({
+      name: "consumer",
+      filename: "remoteEntry.js",
+      remotes: {
+        WmRemotePeople: `WmRemotePeople@${process.env.REMOTE_PEOPLE_ENTRY_URL}`,
+      },
+    }),
+  ] : [
+    new VueClientPlugin(),
+    new ModuleFederationPlugin({
+      name: "consumer",
+      filename: "remoteEntry.js",
+      remotes: {
+        WmRemoteUI: `WmRemoteUI@${process.env.REMOTE_UI_ENTRY_URL}`,
+      },
+    }),
+    new ModuleFederationPlugin({
+      name: "consumer",
+      filename: "remoteEntry.js",
+      remotes: {
+        WmRemotePeople: `WmRemotePeople@${process.env.REMOTE_PEOPLE_ENTRY_URL}`,
+      },
+    }),
+  ],
+});
 
-    // 生成客户端 manifest（供服务端渲染使用）
-    new VueSSRClientPlugin(),
-
-    // 开发环境热更新
-    !isProd && new webpack.HotModuleReplacementPlugin(),
-
-    // 生成 HTML 模板（仅用于开发环境，生产环境由服务端渲染生成）
-    !isProd && new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'public/index.template.html',
-      inject: true
-    })
-  ].filter(Boolean) // 过滤掉 false 的插件（如生产环境不加载热更新插件）,
-
-  // 代码分割配置（优化加载性能）
-  optimization: isProd ? {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
+if (isProd) {
+  const productConfig = merge(config, {
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            format: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+      ],
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendors: {
+            test: (module) => /node_modules/.test(module.context)
+              && !/node_modules\/view-design\/dist/.test(module.context)
+              && !/node_modules\/iview\/dist/.test(module.context)
+              && !/\.css$/.test(module.request),
+            name: 'vendors',
+            minChunks: 1,
+            chunks: 'initial',
+            priority: -1,
+          },
+          viewDesign: {
+            test: (module) => /node_modules\/view-design\/dist/.test(module.context) && !/\.css$/.test(module.request),
+            name: 'view-design',
+            minChunks: 1,
+            chunks: 'initial',
+            priority: -2,
+          },
+          iview: {
+            test: (module) => /node_modules\/iview\/dist/.test(module.context) && !/\.css$/.test(module.request),
+            name: 'iview',
+            minChunks: 1,
+            chunks: 'initial',
+            priority: -3,
+          },
+        },
+      },
+      runtimeChunk: {
+        name: 'manifest',
+      },
     },
-    runtimeChunk: {
-      name: 'runtime'
-    }
-  } : {}
-})
+  });
+
+  return module.exports = productConfig;
+}
+
+module.exports = config;
