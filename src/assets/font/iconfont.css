@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "iconfont";
+  src:url('iconfont.ttf?t=1555580232429') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yingyong-gongwen:before {
+  content: "\e6a6";
+}
+
+.icon-yingyong-hetong:before {
+  content: "\e6a7";
+}
+
+.icon-yingyong-huiyi:before {
+  content: "\e6a8";
+}
+
+.icon-yingyong-huiyishi:before {
+  content: "\e6a9";
+}
+
+.icon-yingyong-wendang:before {
+  content: "\e6ab";
+}
+
+.icon-yingyong-zichan:before {
+  content: "\e6ac";
+}
+
+.icon-yingyong-zixun:before {
+  content: "\e6ad";
+}
+
+.icon-yingyong-xiujia:before {
+  content: "\e6ae";
+}
+
+.icon-yingyong-jiedai:before {
+  content: "\e6c1";
+}
+
+.icon-MOSS:before {
+  content: "\e71a";
+}
+
+.icon-yingyong-wendang1:before {
+  content: "\e721";
+}
+
+.icon-tongxunlu:before {
+  content: "\e757";
+}
+
+.icon-yingyong-jiaban:before {
+  content: "\e6a5";
+}
+
+.iconfont.icon-yingyong-gongwen{
+  background: #9b4ce4;
+}
+.iconfont.icon-tongxunlu{
+  background: #84bd60;
+}
+.iconfont.icon-yingyong-wendang1{
+  background: #288ca9;
+}
+.iconfont.icon-MOSS{
+  background: #1165c7;
+}
+.iconfont.icon-yingyong-jiedai{
+  background: #a7af66;
+}
+.iconfont.icon-yingyong-xiujia{
+  background: #d25737;
+}
+.iconfont.icon-yingyong-zixun{
+  background: #9a3fb4;
+}
+.iconfont.icon-yingyong-zichan{
+  background: #ee4442;
+}
+.iconfont.icon-yingyong-wendang{
+  background: #a7af66;
+}
+.iconfont.icon-yingyong-huiyishi{
+  background: #365aa4;
+}
+.iconfont.icon-yingyong-huiyi{
+  background: #e2a66b;
+}
+.iconfont.icon-yingyong-hetong{
+  background: #f79633;
+}
+.iconfont.icon-yingyong-jiaban{
+  background: #39734c;
+}

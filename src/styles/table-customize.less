@@ -1,0 +1,30 @@
+// 自定義table樣式
+  ::v-deep .ivu-table-wrapper{
+    border: none;
+  }
+  .table-customize{
+    ::v-deep .ivu-table{
+      color: #222222;
+    }
+    ::v-deep .ivu-table-cell{
+      word-break: normal;
+    }
+  
+    ::v-deep .ivu-table:after{
+      width: 0;
+    }
+  
+    ::v-deep .ivu-table{
+      font-size: 14px;
+    }
+  
+    ::v-deep .ivu-table-header{
+      th{
+          height: 50px;
+          background-color: transparent;
+          font-size: 16px;
+          font-weight: unset;
+          border-bottom: 2px solid #CDCDCD;
+      }
+    }
+  }

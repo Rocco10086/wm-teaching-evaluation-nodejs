@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@consts/*": [
+        "src/consts/*"
+      ],
+      "@filters/*": [
+        "src/filters/*"
+      ],
+      "@helps/*": [
+        "src/helps/*"
+      ],
+      "@i18n/*": [
+        "src/i18n/*"
+      ],
+      "@mixins/*": [
+        "src/mixins/*"
+      ],
+      "@plugins/*": [
+        "src/plugins/*"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@user/*": [
+        "src/uses/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@views/*": [
+        "src/views/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "src"
+  ]
+}

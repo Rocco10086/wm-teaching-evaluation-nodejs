@@ -1,0 +1,96 @@
+@import './variables';
+
+@widths: 10 20 30 32 40 50 52 60 80 82 65 70 90 100 110 115 120 136 140 145 150 170 200 250 300 330 420 450;
+each(@widths, {
+  .w-@{value} {
+    width: unit(@value, px);
+  }
+  .h-@{value} {
+    height: unit(@value, px);
+  }
+  .min-h-@{value} {
+    min-height: unit(@value, px);
+  }
+  .max-h-@{value} {
+    max-height: unit(@value, px);
+  }
+  .min-w-@{value} {
+    min-width: unit(@value, px);
+  }
+  .max-w-@{value} {
+    max-width: unit(@value, px);
+  }
+});
+
+
+@gaps: 0 1 2 3 4 5 6 7 8 9 10 12 15 18 20 25 30 32 40 45 50 60 70 80;
+each(@gaps, {
+  .m-l-@{value} {
+    margin-left: unit(@value, px);
+  }
+  .m-r-@{value} {
+    margin-right: unit(@value, px);
+  }
+  .m-t-@{value} {
+    margin-top: unit(@value, px);
+  }
+  .m-b-@{value} {
+    margin-bottom: unit(@value, px);
+  }
+  .m-y-@{value} {
+    margin-top: unit(@value, px);
+    margin-bottom: unit(@value, px);
+  }
+  .m-x-@{value} {
+    margin-left: unit(@value, px);
+    margin-right: unit(@value, px);
+  }
+
+  .p-l-@{value} {
+    padding-left: unit(@value, px);
+  }
+  .p-r-@{value} {
+    padding-right: unit(@value, px);
+  }
+  .p-t-@{value} {
+    padding-top: unit(@value, px);
+  }
+  .p-b-@{value} {
+    padding-bottom: unit(@value, px);
+  }
+  .p-y-@{value} {
+    padding-top: unit(@value, px);
+    padding-bottom: unit(@value, px);
+  }
+  .p-x-@{value} {
+    padding-left: unit(@value, px);
+    padding-right: unit(@value, px);
+  }
+});
+
+.h-32{
+  height: 32px;
+}
+
+.f-14{
+  font-size: 14px;
+}
+
+// tooptip 內容超出被截取
+.ivu-tooltip-inner{
+  max-width: 300px !important;
+  white-space: normal !important;
+  font-size: 14px !important;
+}
+
+// iview 分页乱码问题
+/* .ivu-page-item-jump-next:after, .ivu-page-item-jump-prev:after{
+  content: '\2022\2022\2022' !important;
+} */
+
+/* .ivu-page-item-jump-next::after{
+
+}
+.ivu-page-item-jump-prev::after{
+
+} */

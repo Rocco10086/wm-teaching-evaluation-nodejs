@@ -1,0 +1,25 @@
+{
+  "processors": [
+    "@mapbox/stylelint-processor-arbitrary-tags"
+  ],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-rational-order"
+  ],
+  "plugins": [
+    "stylelint-less",
+    "stylelint-order",
+    "stylelint-config-rational-order/plugin"
+  ],
+  "customSyntax": "postcss-less",
+  "rules": {
+    "no-empty-source": null,
+    "no-empty-first-line": null,
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["v-deep"]
+      }
+    ]
+  }
+}

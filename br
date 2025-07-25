@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+git pull && yarn install && yarn run build && pm2 restart wm-eas-assessment-staf-nodejs

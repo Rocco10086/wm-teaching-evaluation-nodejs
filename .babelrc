@@ -1,0 +1,26 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "useBuiltIns": "entry",
+        "corejs": 3
+      }
+    ]
+  ],
+  "comments": false,
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-proposal-object-rest-spread"
+    // [
+    //   "import",
+    //   {
+    //     "libraryName": "view-design",
+    //     "libraryDirectory": "src/components"
+    //   }
+    // ]
+  ]
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_消息</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1-1通讯录-部门" transform="translate(-1588.000000, -14.000000)" stroke="#FFFFFF" stroke-width="2">
+            <g id="WeMust办公平台PC_头部">
+                <g id="icon_消息" transform="translate(1588.000000, 14.000000)">
+                    <path d="M18.5,18 L18,18 L18,10 C18,6.45994787 15.357126,3.48826627 11.8762601,3.05420844 L11,2.94494035 L11,0 L12,1 L10,1 L11,1.72303431e-15 L11,2.94494035 L10.1237399,3.05420844 C6.64287403,3.48826627 4,6.45994787 4,10 L4,18 L3.5,18 L7.90122697,18 L8.09445448,18.7507415 C8.43255428,20.0643514 9.62326227,21 11,21 C12.3767377,21 13.5674457,20.0643514 13.9055455,18.7507415 L14.098773,18 L18.5,18 Z M13.5980415,19.500726 C13.0659575,20.4205405 12.0829254,21 11,21 C9.91707462,21 8.93404253,20.4205405 8.40195852,19.500726 L7.53383543,18 L14.4661646,18 L13.5980415,19.500726 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

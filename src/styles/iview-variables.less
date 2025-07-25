@@ -1,0 +1,85 @@
+/*
+Write your variables here. All available variables can be
+found in https://github.com/iview/iview/blob/2.0/src/styles/custom.less.
+*/
+
+@import '~view-design/src/styles/index.less';
+@import './variables.less';
+
+// Here are the variables to cover, such as:
+@primary-color: #365AA4;
+
+.ivu-input {
+  border-radius: 2px;
+  border: 1px solid @borderColor2;
+  font-size: 14px;
+  color: @fontColor1;
+  padding-left: 10px;
+  padding-right: 10px;
+  &::placeholder {
+    // color: @fontColor2;
+    color: #c5c8ce;
+    font-size: 14px;
+  }
+  &:focus {
+    box-shadow: 0 0 transparent;
+  }
+}
+
+// iview input
+.ivu-select-input{
+  font-size: 14px;
+}
+.ivu-select-single .ivu-select-selection .ivu-select-placeholder, .ivu-select-single .ivu-select-selection .ivu-select-selected-value{
+  font-size: 14px;
+}
+
+.ivu-date-picker {
+  .ivu-icon{
+    cursor: pointer;
+  }
+}
+.ivu-select-item {
+  font-size: 14px !important;
+  color: @fontColor3;
+}
+.ivu-select-placeholder {
+  color: @fontColor2;
+}
+
+.ivu-radio-group {
+  .ivu-radio {
+    margin-right: 10px;
+  }
+  .ivu-radio-wrapper {
+    margin-right: 50px;
+    font-size: 14px;
+    color: @fontColor1;
+  }
+}
+.ivu-checkbox {
+  vertical-align: middle;
+}
+.ivu-btn,
+.ivu-btn:active,
+.ivu-btn:focus {
+  box-shadow: 0 0 transparent;
+}
+
+.ivu-btn-text {
+  padding: 0 14px;
+  &:hover,
+  &:focus {
+    background: transparent;
+    box-shadow: 0 0 transparent;
+  }
+  span {
+    color: @mainColor;
+    font-size: 14px;
+  }
+}
+
+// iview 分页乱码问题
+.ivu-page-item-jump-next:after, .ivu-page-item-jump-prev:after{
+  content: '\2022\2022\2022';
+}

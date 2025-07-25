@@ -1,0 +1,9 @@
+dist/*
+/server/
+/build
+/src/assets/font/
+.env
+.env.test
+.eslintrc.js
+ecosystem.config.js
+postcss.config.js
