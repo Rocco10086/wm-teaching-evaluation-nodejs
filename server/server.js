@@ -1,3 +1,4 @@
+// Express 服务入口，确保服务能启动
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
