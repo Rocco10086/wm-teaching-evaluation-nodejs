@@ -1,34 +1,35 @@
-// 服务端渲染：创建Vue实例工厂，返回Promise（支持路由预取数据）
-import { createApp } from './main'
+// 服务端入口
 
-export default context => {
-  // 为每个请求创建新的应用实例
-  return new Promise((resolve, reject) => {
-    const { app, router, store } = createApp()
-    
-    // 设置路由, 服务端路由跳转
-    router.push(context.url)
-    
-    // 路由就绪后处理
-    router.onReady(() => {
-      const matchedComponents = router.getMatchedComponents()
-      if (!matchedComponents.length) {
-        return reject({ code: 404 })
-      }
-      
-      // 调用组件的asyncData方法获取数据
-      Promise.all(matchedComponents.map(Component => {
-        if (Component.asyncData) {
-          return Component.asyncData({
-            store,
-            route: router.currentRoute
-          })
-        }
-      })).then(() => {
-        // 将store状态注入上下文，供模板渲染
-        context.state = store.state
-        resolve(app)
-      }).catch(reject)
-    }, reject)
-  })
-}
+import { Locale } from '@consts/locale';
+import { createApp } from './main';
+
+
+export default (ctx) => new Promise((resolve, reject) => {
+  const { app, router, store, i18n } = createApp();
+  i18n.locale = ctx.appLocale || Locale.ZH_MO;
+
+  router.push(ctx.url);
+  // eslint-disable-next-line consistent-return
+  router.onReady(() => {
+    const matched = router.getMatchedComponents();
+    if (matched.length === 0) {
+      const err = new Error('Router has not matched compoinents found');
+      err.code = 404;
+      reject(err);
+      return;
+    }
+
+    Promise.all(matched.map((component) => component.asyncData && component.asyncData({
+      router: router.currentRoute,
+      store,
+      locale: ctx.appLocale,
+    }))).then(() => {
+      Object.assign(ctx, {
+        state: store.state,
+        title: i18n.t('title'),
+      });
+
+      resolve(app);
+    }).catch(reject);
+  }, reject);
+});
